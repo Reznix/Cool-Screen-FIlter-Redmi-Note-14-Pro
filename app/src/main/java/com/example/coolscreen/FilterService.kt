@@ -29,7 +29,6 @@ class FilterService : Service() {
             .setPriority(NotificationCompat.PRIORITY_MIN)
             .build()
             
-        // Для Android 14+ нужно указывать тип и здесь, если используем compat
         if (Build.VERSION.SDK_INT >= 34) {
             startForeground(101, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
         } else {
@@ -39,8 +38,11 @@ class FilterService : Service() {
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
         overlayView = View(this)
-        // План Б: Полупрозрачный холодный голубой (Alpha=0A ~4%)
-        overlayView?.setBackgroundColor(0x0AD0E0FF.toInt())
+        
+        // ТЮНИНГ ЦВЕТА (Меньше серости в тенях)
+        // Alpha: 0x08 (~3%)
+        // Color: 4080FF (Более насыщенный синий, чтобы меньше поднимать яркость черного)
+        overlayView?.setBackgroundColor(0x084080FF.toInt())
 
         val params = WindowManager.LayoutParams().apply {
             type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -54,7 +56,6 @@ class FilterService : Service() {
                     WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or 
                     WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 
-            // Критично для Xiaomi/HyperOS с вырезами камеры:
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
             }
@@ -64,13 +65,21 @@ class FilterService : Service() {
             height = WindowManager.LayoutParams.MATCH_PARENT
         }
 
-        windowManager.addView(overlayView, params)
+        try {
+            windowManager.addView(overlayView, params)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         if (overlayView != null) {
-            windowManager.removeView(overlayView)
+            try {
+                windowManager.removeView(overlayView)
+            } catch (e: IllegalArgumentException) {
+                // View уже был удален или не прикреплен - игнорируем
+            }
             overlayView = null
         }
     }
