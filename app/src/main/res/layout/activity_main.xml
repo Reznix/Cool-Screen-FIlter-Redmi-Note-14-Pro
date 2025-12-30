@@ -1,44 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="20dp">
+    android:background="#000000"
+    android:fillViewport="true">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Выберите режим:"
-        android:textSize="18sp"
-        android:layout_marginBottom="20dp"/>
-
-    <Button
-        android:id="@+id/btnMode1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1. Мягкий (6%)"
-        android:layout_marginBottom="10dp"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/btnMode2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2. Средний (8%)"
-        android:layout_marginBottom="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CoolScreen Lab"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
 
-    <Button
-        android:id="@+id/btnMode3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="3. Глубокий (Смесь)"
-        android:layout_marginBottom="30dp"/>
+        <!-- Основные режимы -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Main Presets"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="8dp"/>
 
-    <Button
-        android:id="@+id/btnOff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FF5555"
-        android:text="ВЫКЛЮЧИТЬ"/>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="2">
 
-</LinearLayout>
+            <!-- БАЗА: Alpha 6%, B 100% -->
+            <Button
+                android:id="@+id/btnBase"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="БАЗА"
+                android:layout_margin="4dp"/>
+
+            <!-- COOL: Alpha 9%, B 67% -->
+            <Button
+                android:id="@+id/btnCool"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="COOL"
+                android:layout_margin="4dp"/>
+
+            <!-- COOL+: Alpha 12%, B 50% -->
+            <Button
+                android:id="@+id/btnCoolPlus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="COOL+"
+                android:layout_margin="4dp"/>
+
+            <!-- COOL-G: Alpha 10%, R 2, G 4, B 60% -->
+            <Button
+                android:id="@+id/btnCoolG"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="COOL-G"
+                android:layout_margin="4dp"/>
+        </GridLayout>
+
+        <!-- Эксперименты -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Experimental (Math Tricks)"
+            android:textColor="#AAAAAA"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+
+            <!-- EXP 1: Alpha 7%, B 86% -->
+            <Button
+                android:id="@+id/btnExp1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="EXP 1"
+                android:layout_margin="4dp"/>
+
+            <!-- EXP 2: Alpha 8%, B 75% -->
+            <Button
+                android:id="@+id/btnExp2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="EXP 2"
+                android:layout_margin="4dp"/>
+             
+            <!-- EXP 3: Alpha 6%, G 6% -->
+            <Button
+                android:id="@+id/btnExp3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="EXP 3"
+                android:layout_margin="4dp"/>
+
+            <!-- EXP 4: Alpha 6%, R 6%, G 2% -->
+            <Button
+                android:id="@+id/btnExp4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="EXP 4"
+                android:layout_margin="4dp"/>
+
+            <!-- EXP 5: Alpha 6%, R 3%, G 6% -->
+            <Button
+                android:id="@+id/btnExp5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="EXP 5"
+                android:layout_margin="4dp"/>
+
+            <!-- EXP 6: Alpha 10%, R 1%, G 2%, B 60% -->
+            <Button
+                android:id="@+id/btnExp6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="EXP 6"
+                android:layout_margin="4dp"/>
+
+             <!-- EXP 7: Alpha 10%, R 2%, G 4%, B 60% -->
+            <Button
+                android:id="@+id/btnExp7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="EXP 7"
+                android:layout_margin="4dp"/>
+
+        </GridLayout>
+
+        <Button
+            android:id="@+id/btnOff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#FF4444"
+            android:text="OFF"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+</ScrollView>
