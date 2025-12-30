@@ -5,7 +5,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
+import android.content.pm.ServiceInfo
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
@@ -21,58 +21,49 @@ class FilterService : Service() {
     override fun onCreate() {
         super.onCreate()
         
-        // 1. Запуск Foreground Service (обязательно для Android 14/15)
         createNotificationChannel()
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("CoolScreen")
             .setContentText("Фильтр активен")
             .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setPriority(NotificationCompat.PRIORITY_MIN) // Чтобы не шумело
+            .setPriority(NotificationCompat.PRIORITY_MIN)
             .build()
             
-        // ID уведомления должен быть > 0
-        startForeground(101, notification)
+        // Для Android 14+ нужно указывать тип и здесь, если используем compat
+        if (Build.VERSION.SDK_INT >= 34) {
+            startForeground(101, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+        } else {
+            startForeground(101, notification)
+        }
 
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-        // 2. Создаем View фильтра
         overlayView = View(this)
-        
-        // ПЛАН Б: Простая заливка цветом
-        // Формат ARGB: 
-        // Alpha = 0x0A (около 4% прозрачности) - можно менять от 05 до 15
-        // Red=D0, Green=E0, Blue=FF (Холодный голубой)
-        // 
-        // Если будет слишком слабо — поменяйте 0x0A на 0x10 или 0x15
-        // Если будет слишком видно на черном — поменяйте на 0x05
+        // План Б: Полупрозрачный холодный голубой (Alpha=0A ~4%)
         overlayView?.setBackgroundColor(0x0AD0E0FF.toInt())
 
-        // 3. Параметры окна (Оверлей)
         val params = WindowManager.LayoutParams().apply {
-            // Тип окна: поверх всех приложений
             type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             } else {
                 WindowManager.LayoutParams.TYPE_PHONE
             }
             
-            // Флаги:
-            // FLAG_NOT_TOUCHABLE - пропускать нажатия сквозь фильтр (Самое важное!)
-            // FLAG_NOT_FOCUSABLE - не перехватывать клавиатуру
-            // FLAG_LAYOUT_IN_SCREEN - рисовать даже под статус-баром и вырезом камеры
             flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
                     WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or 
-                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS // На весь-весь экран
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 
-            // Формат: Прозрачный фон (чтобы работала альфа)
+            // Критично для Xiaomi/HyperOS с вырезами камеры:
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
+            }
+
             format = PixelFormat.TRANSLUCENT
-            
             width = WindowManager.LayoutParams.MATCH_PARENT
             height = WindowManager.LayoutParams.MATCH_PARENT
         }
 
-        // Добавляем View на экран
         windowManager.addView(overlayView, params)
     }
 
@@ -91,7 +82,7 @@ class FilterService : Service() {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 "CoolScreen Service",
-                NotificationManager.IMPORTANCE_MIN // Минимальная важность (без звука)
+                NotificationManager.IMPORTANCE_MIN
             )
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
