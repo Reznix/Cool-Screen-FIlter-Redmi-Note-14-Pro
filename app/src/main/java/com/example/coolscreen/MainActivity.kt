@@ -18,18 +18,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Ищем новые кнопки по их ID
         findViewById<Button>(R.id.btnMode1).setOnClickListener {
-            // Пресет 1: 0x060000FF (Мягкий)
             startFilter(0x060000FF)
         }
 
         findViewById<Button>(R.id.btnMode2).setOnClickListener {
-            // Пресет 2: 0x080000FF (Посильнее)
             startFilter(0x080000FF.toInt())
         }
 
         findViewById<Button>(R.id.btnMode3).setOnClickListener {
-            // Пресет 3: 0x050010FF (Глубокий синий)
             startFilter(0x050010FF)
         }
         
