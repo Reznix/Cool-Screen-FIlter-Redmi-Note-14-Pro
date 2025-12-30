@@ -4,25 +4,20 @@ plugins {
 }
 
 android {
-    namespace 'com.example.coolscreen' // Обязательно для новых версий Gradle
-    compileSdk 33
+    namespace 'com.example.coolscreen' // Убедитесь, что эта строка есть!
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.coolscreen"
-        minSdk 26 // Android 8.0 (для поддержки startForegroundService)
-        targetSdk 33
+        minSdk 26
+        targetSdk 34
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        // Остальное без изменений...
     }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+    // ...
+}
 
     // Настройки совместимости Java (важно для GitHub Actions)
     compileOptions {
