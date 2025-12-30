@@ -1,9 +1,12 @@
 package com.example.coolscreen
 
-import android.app.*
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.graphics.*
+import android.graphics.Color
+import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
 import android.view.View
@@ -18,57 +21,67 @@ class FilterService : Service() {
     override fun onCreate() {
         super.onCreate()
         
-        // Создаём уведомление для Foreground Service
+        // 1. Запуск Foreground Service (обязательно для Android 14/15)
         createNotificationChannel()
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("CoolScreen Active")
-            .setContentText("Фильтр экрана включён")
+            .setContentTitle("CoolScreen")
+            .setContentText("Фильтр активен")
             .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setPriority(NotificationCompat.PRIORITY_MIN) // Чтобы не шумело
             .build()
-        startForeground(1, notification)
+            
+        // ID уведомления должен быть > 0
+        startForeground(101, notification)
 
         windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-        // Создаём прозрачное View с цветовым фильтром
-        overlayView = object : View(this) {
-            private val paint = Paint().apply {
-                // Матрица для уменьшения Red и Green каналов
-                val colorMatrix = ColorMatrix(floatArrayOf(
-                    0.85f, 0f, 0f, 0f, 0f,  // Red канал * 0.85
-                    0f, 0.85f, 0f, 0f, 0f,  // Green канал * 0.85
-                    0f, 0f, 1.0f, 0f, 0f,   // Blue канал * 1.0 (не трогаем)
-                    0f, 0f, 0f, 1f, 0f      // Alpha без изменений
-                ))
-                colorFilter = ColorMatrixColorFilter(colorMatrix)
-            }
+        // 2. Создаем View фильтра
+        overlayView = View(this)
+        
+        // ПЛАН Б: Простая заливка цветом
+        // Формат ARGB: 
+        // Alpha = 0x0A (около 4% прозрачности) - можно менять от 05 до 15
+        // Red=D0, Green=E0, Blue=FF (Холодный голубой)
+        // 
+        // Если будет слишком слабо — поменяйте 0x0A на 0x10 или 0x15
+        // Если будет слишком видно на черном — поменяйте на 0x05
+        overlayView?.setBackgroundColor(0x0AD0E0FF.toInt())
 
-            override fun onDraw(canvas: Canvas) {
-                super.onDraw(canvas)
-                // Рисуем прозрачный прямоугольник с фильтром
-                canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), paint)
-            }
-        }
-
+        // 3. Параметры окна (Оверлей)
         val params = WindowManager.LayoutParams().apply {
+            // Тип окна: поверх всех приложений
             type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             } else {
                 WindowManager.LayoutParams.TYPE_PHONE
             }
+            
+            // Флаги:
+            // FLAG_NOT_TOUCHABLE - пропускать нажатия сквозь фильтр (Самое важное!)
+            // FLAG_NOT_FOCUSABLE - не перехватывать клавиатуру
+            // FLAG_LAYOUT_IN_SCREEN - рисовать даже под статус-баром и вырезом камеры
             flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
-                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or 
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS // На весь-весь экран
+
+            // Формат: Прозрачный фон (чтобы работала альфа)
             format = PixelFormat.TRANSLUCENT
+            
             width = WindowManager.LayoutParams.MATCH_PARENT
             height = WindowManager.LayoutParams.MATCH_PARENT
         }
 
+        // Добавляем View на экран
         windowManager.addView(overlayView, params)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        overlayView?.let { windowManager.removeView(it) }
+        if (overlayView != null) {
+            windowManager.removeView(overlayView)
+            overlayView = null
+        }
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -77,8 +90,8 @@ class FilterService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "Filter Service",
-                NotificationManager.IMPORTANCE_LOW
+                "CoolScreen Service",
+                NotificationManager.IMPORTANCE_MIN // Минимальная важность (без звука)
             )
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(channel)
@@ -86,6 +99,6 @@ class FilterService : Service() {
     }
 
     companion object {
-        private const val CHANNEL_ID = "FilterServiceChannel"
+        private const val CHANNEL_ID = "CoolScreenChannel"
     }
 }
