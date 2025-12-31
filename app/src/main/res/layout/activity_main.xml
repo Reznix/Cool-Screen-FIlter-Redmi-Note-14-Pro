@@ -2,108 +2,59 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="@drawable/background_gradient"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center_horizontal">
+        android:padding="24dp"
+        android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CoolScreen Lab 3.0"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
+            android:text="CoolScreen Final"
+            android:textColor="#000000"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="40dp"
+            android:shadowColor="#FFFFFF"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4"/>
 
-        <!-- Classics -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="The Classics"
-            android:textColor="#AAAAAA"
-            android:layout_marginBottom="8dp"/>
-
+        <!-- V1: 0x060000FF -->
         <Button
-            android:id="@+id/btnBase"
+            android:id="@+id/btnV1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="BASE (0x06...FF)"
-            android:layout_marginBottom="8dp"/>
-
-        <Button
-            android:id="@+id/btnFavorite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="FAVORITE (0x0A...99)"
-            android:backgroundTint="#4CAF50"
+            android:layout_height="60dp"
+            android:text="V1 (Original)"
+            android:textSize="18sp"
+            android:backgroundTint="#333333"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="16dp"/>
 
-        <!-- New Experiments -->
-        <TextView
+        <!-- V2: 0x0A040899 -->
+        <Button
+            android:id="@+id/btnV2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="New Cyan Mixes"
-            android:textColor="#AAAAAA"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_height="60dp"
+            android:text="V2 (Smart Mix)"
+            android:textSize="18sp"
+            android:backgroundTint="#000000"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="40dp"/>
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="2">
-
-            <!-- COOL 1: 0x0C042095 -->
-            <Button
-                android:id="@+id/btnCool1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="COOL 1"
-                android:layout_margin="4dp"/>
-
-            <!-- COOL 2: 0x080050FF -->
-            <Button
-                android:id="@+id/btnCool2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="COOL 2"
-                android:layout_margin="4dp"/>
-
-            <!-- COOL 3: 0x090040FF -->
-            <Button
-                android:id="@+id/btnCool3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="COOL 3"
-                android:layout_margin="4dp"/>
-
-            <!-- COOL 4: 0x0A0050FF -->
-            <Button
-                android:id="@+id/btnCool4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="COOL 4"
-                android:layout_margin="4dp"/>
-
-        </GridLayout>
-
+        <!-- OFF -->
         <Button
             android:id="@+id/btnOff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:backgroundTint="#FF4444"
             android:text="OFF"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#D32F2F"
             android:textStyle="bold"/>
 
     </LinearLayout>
