@@ -28,19 +28,19 @@ class MainActivity : AppCompatActivity() {
             startFilter(0x0A040899.toInt()) 
         }
 
-        // 3. COOL 1: 0x200000FF
+        // 3. COOL 1: 0x100408C0
         findViewById<Button>(R.id.btnCool1).setOnClickListener { 
-            startFilter(0x200000FF.toInt()) 
+            startFilter(0x100408C0.toInt()) 
         }
 
-        // 4. COOL 2: 0x140000FF
+        // 4. COOL 2: 0x0C0408B0
         findViewById<Button>(R.id.btnCool2).setOnClickListener { 
-            startFilter(0x140000FF.toInt()) 
+            startFilter(0x0C0408B0.toInt()) 
         }
 
         // 5. COOL 3: 0x140010FF
         findViewById<Button>(R.id.btnCool3).setOnClickListener { 
-            startFilter(0x140010FF.toInt()) 
+            startFilter(0x0B0408AA.toInt()) 
         }
 
         // 6. COOL 4: 0x300010FF
