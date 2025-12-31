@@ -33,19 +33,19 @@ class MainActivity : AppCompatActivity() {
             startFilter(0x200000FF.toInt()) 
         }
 
-        // 4. COOL 2: 0x300000FF
+        // 4. COOL 2: 0x140000FF
         findViewById<Button>(R.id.btnCool2).setOnClickListener { 
-            startFilter(0x300000FF.toInt()) 
+            startFilter(0x140000FF.toInt()) 
         }
 
-        // 5. COOL 3: 0x200010FF
+        // 5. COOL 3: 0x140010FF
         findViewById<Button>(R.id.btnCool3).setOnClickListener { 
-            startFilter(0x200010FF.toInt()) 
+            startFilter(0x140010FF.toInt()) 
         }
 
         // 6. COOL 4: 0x300010FF
         findViewById<Button>(R.id.btnCool4).setOnClickListener { 
-            startFilter(0x300010FF.toInt()) 
+            startFilter(0x160000FF.toInt()) 
         }
 
 
