@@ -15,68 +15,87 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CoolScreen Lab 2.0"
+            android:text="CoolScreen Lab 3.0"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="20dp"/>
 
+        <!-- Classics -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="The Best Selection"
+            android:text="The Classics"
             android:textColor="#AAAAAA"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="8dp"/>
 
-        <!-- BASE: 0x060000FF -->
         <Button
             android:id="@+id/btnBase"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BASE (Original)"
+            android:text="BASE (0x06...FF)"
             android:layout_marginBottom="8dp"/>
 
-        <!-- FAVORITE: 0x0A040899 -->
         <Button
             android:id="@+id/btnFavorite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FAVORITE (Smart Mix)"
+            android:text="FAVORITE (0x0A...99)"
             android:backgroundTint="#4CAF50"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="8dp"/>
 
+        <!-- New Experiments -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Math Upgrades (Same Shadows)"
+            android:text="New Cyan Mixes"
             android:textColor="#AAAAAA"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"/>
 
-        <!-- UPGRADE 1: 0x0C030680 -->
-        <Button
-            android:id="@+id/btnUpgrade1"
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="UPGRADE 1 (More Cold)"
-            android:layout_marginBottom="8dp"/>
+            android:columnCount="2">
 
-        <!-- UPGRADE 2: 0x0E03066E -->
-        <Button
-            android:id="@+id/btnUpgrade2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="UPGRADE 2 (Max Cold)"
-            android:layout_marginBottom="8dp"/>
+            <!-- COOL 1: 0x0C042095 -->
+            <Button
+                android:id="@+id/btnCool1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="COOL 1"
+                android:layout_margin="4dp"/>
 
-        <!-- GREEN TWEAK: 0x0C030880 -->
-        <Button
-            android:id="@+id/btnGreenTweak"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GREEN TWEAK (Less Blue Shadows)"
-            android:layout_marginBottom="8dp"/>
+            <!-- COOL 2: 0x080050FF -->
+            <Button
+                android:id="@+id/btnCool2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="COOL 2"
+                android:layout_margin="4dp"/>
+
+            <!-- COOL 3: 0x090040FF -->
+            <Button
+                android:id="@+id/btnCool3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="COOL 3"
+                android:layout_margin="4dp"/>
+
+            <!-- COOL 4: 0x0A0050FF -->
+            <Button
+                android:id="@+id/btnCool4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="COOL 4"
+                android:layout_margin="4dp"/>
+
+        </GridLayout>
 
         <Button
             android:id="@+id/btnOff"
@@ -88,4 +107,4 @@
             android:textStyle="bold"/>
 
     </LinearLayout>
-</ScrollView> 
+</ScrollView>
