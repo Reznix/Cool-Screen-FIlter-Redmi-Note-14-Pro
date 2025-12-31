@@ -12,40 +12,29 @@
         android:padding="24dp"
         android:gravity="center">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CoolScreen Final"
-            android:textColor="#000000"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="40dp"
-            android:shadowColor="#FFFFFF"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="4"/>
-
-        <!-- V1: 0x060000FF -->
+        <!-- Кнопка V1 (0x060000FF) -->
         <Button
             android:id="@+id/btnV1"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="V1 (Original)"
-            android:textSize="18sp"
+            android:layout_height="80dp"
+            android:text="V1"
+            android:textSize="24sp"
+            android:textStyle="bold"
             android:backgroundTint="#333333"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="24dp"/>
 
-        <!-- V2: 0x0A040899 -->
+        <!-- Кнопка V2 (0x0A040899) -->
         <Button
             android:id="@+id/btnV2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="V2 (Smart Mix)"
-            android:textSize="18sp"
+            android:layout_height="80dp"
+            android:text="V2"
+            android:textSize="24sp"
+            android:textStyle="bold"
             android:backgroundTint="#000000"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="60dp"/>
 
         <!-- OFF -->
         <Button
@@ -54,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="OFF"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#D32F2F" 
+            android:backgroundTint="#D32F2F"
             android:textStyle="bold"/>
 
     </LinearLayout>
