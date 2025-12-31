@@ -18,36 +18,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 1. BASE: 0x060000FF
-        findViewById<Button>(R.id.btnBase).setOnClickListener { 
+        // V1: Классика (0x060000FF)
+        findViewById<Button>(R.id.btnV1).setOnClickListener { 
             startFilter(0x060000FF) 
         }
 
-        // 2. FAVORITE: 0x0A040899
-        findViewById<Button>(R.id.btnFavorite).setOnClickListener { 
+        // V2: Ваш фаворит (0x0A040899)
+        findViewById<Button>(R.id.btnV2).setOnClickListener { 
             startFilter(0x0A040899.toInt()) 
         }
-
-        // 3. COOL 1: 0x100408C0
-        findViewById<Button>(R.id.btnCool1).setOnClickListener { 
-            startFilter(0x100408C0.toInt()) 
-        }
-
-        // 4. COOL 2: 0x0C0408B0
-        findViewById<Button>(R.id.btnCool2).setOnClickListener { 
-            startFilter(0x0C0408B0.toInt()) 
-        }
-
-        // 5. COOL 3: 0x140010FF
-        findViewById<Button>(R.id.btnCool3).setOnClickListener { 
-            startFilter(0x0B0408AA.toInt()) 
-        }
-
-        // 6. COOL 4: 0x300010FF
-        findViewById<Button>(R.id.btnCool4).setOnClickListener { 
-            startFilter(0x160000FF.toInt()) 
-        }
-
 
         // ВЫКЛЮЧИТЬ
         findViewById<Button>(R.id.btnOff).setOnClickListener { 
