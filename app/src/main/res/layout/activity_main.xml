@@ -11,25 +11,13 @@
         android:orientation="vertical"
         android:padding="24dp"
         android:gravity="center">
-
-        <!-- Кнопка V1 (0x060000FF) -->
-        <Button
-            android:id="@+id/btnV1"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:text="V1"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:backgroundTint="#333333"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="24dp"/>
-
-        <!-- Кнопка V2 (0x0A040899) -->
+        
+        <!-- Кнопка ON (0x0A040899) -->
         <Button
             android:id="@+id/btnV2"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="V2"
+            android:text="ON"
             android:textSize="24sp"
             android:textStyle="bold"
             android:backgroundTint="#000000"
