@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // V1: Классика (0x060000FF)
+        // V1: base был (0x060000FF)
         findViewById<Button>(R.id.btnV1).setOnClickListener { 
-            startFilter(0x060000FF) 
+            startFilter(0x0B03068B) 
         }
 
-        // V2: Ваш фаворит (0x0A040899)
+        // V2: фаворит был (0x0A040899)
         findViewById<Button>(R.id.btnV2).setOnClickListener { 
-            startFilter(0x0A040899.toInt()) 
+            startFilter(0x0C020580.toInt()) 
         }
 
         // ВЫКЛЮЧИТЬ
