@@ -14,7 +14,7 @@
         
         <!-- Кнопка ON (0x0A040899) -->
         <Button
-            android:id="@+id/btnV2"
+            android:id="@+id/btnOn"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:text="ON"
